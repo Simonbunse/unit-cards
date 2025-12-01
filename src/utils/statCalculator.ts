@@ -5,6 +5,7 @@ import {
   equipmentStats,
   typeStats,
   sizeStats,
+  tierStats,
   fortToughness,
   fortSize,
 } from '../fixtures/unitStats';
@@ -14,24 +15,24 @@ export const attack = (state: State): number => {
   return state.type === 'Fortification'
     ? 0
     : ancestryStats[state.ancestry].attack +
-        (state.type === 'Levies'
-          ? 0
-          : experienceStats[state.experience].attack +
-            equipmentStats[state.equipment].attack) +
-        typeStats[state.type].attack +
-        state.attack;
+    (state.type === 'Levies'
+      ? 0
+      : experienceStats[state.experience].attack +
+      equipmentStats[state.equipment].attack) +
+    typeStats[state.type].attack +
+    state.attack;
 };
 
 export const power = (state: State): number => {
   return state.type === 'Fortification'
     ? 0
     : ancestryStats[state.ancestry].power +
-        (state.type === 'Levies'
-          ? 0
-          : experienceStats[state.experience].power +
-            equipmentStats[state.equipment].power) +
-        typeStats[state.type].power +
-        state.power;
+    (state.type === 'Levies'
+      ? 0
+      : experienceStats[state.experience].power +
+      equipmentStats[state.equipment].power) +
+    typeStats[state.type].power +
+    state.power;
 };
 
 const defenseBase = 10;
@@ -39,13 +40,13 @@ export const defense = (state: State, baseless?: boolean): number => {
   return state.type === 'Fortification'
     ? 0
     : (!baseless ? defenseBase : 0) +
-        ancestryStats[state.ancestry].defense +
-        (state.type === 'Levies'
-          ? 0
-          : experienceStats[state.experience].defense +
-            equipmentStats[state.equipment].defense) +
-        typeStats[state.type].defense +
-        state.defense;
+    ancestryStats[state.ancestry].defense +
+    (state.type === 'Levies'
+      ? 0
+      : experienceStats[state.experience].defense +
+      equipmentStats[state.equipment].defense) +
+    typeStats[state.type].defense +
+    state.defense;
 };
 
 const toughnessBase = 10;
@@ -53,25 +54,58 @@ export const toughness = (state: State, baseless?: boolean): number => {
   return state.type === 'Fortification'
     ? fortToughness[state.fortType][state.fortLevel] + state.toughness
     : (!baseless ? toughnessBase : 0) +
-        ancestryStats[state.ancestry].toughness +
-        (state.type === 'Levies'
-          ? 0
-          : experienceStats[state.experience].toughness +
-            equipmentStats[state.equipment].toughness) +
-        typeStats[state.type].toughness +
-        state.toughness;
+    ancestryStats[state.ancestry].toughness +
+    (state.type === 'Levies'
+      ? 0
+      : experienceStats[state.experience].toughness +
+      equipmentStats[state.equipment].toughness) +
+    typeStats[state.type].toughness +
+    state.toughness;
 };
 
 export const morale = (state: State): number => {
   return state.type === 'Fortification'
     ? 0
     : ancestryStats[state.ancestry].morale +
-        (state.type === 'Levies'
-          ? 0
-          : experienceStats[state.experience].morale +
-            equipmentStats[state.equipment].morale) +
-        typeStats[state.type].morale +
-        state.morale;
+    (state.type === 'Levies'
+      ? 0
+      : experienceStats[state.experience].morale +
+      equipmentStats[state.equipment].morale) +
+    typeStats[state.type].morale +
+    state.morale;
+};
+export const command = (state: State): number => {
+  return state.type === 'Fortification'
+    ? 0
+    : ancestryStats[state.ancestry].command +
+    (state.type === 'Levies'
+      ? 0
+      : experienceStats[state.experience].command +
+      equipmentStats[state.equipment].command) +
+    typeStats[state.type].command +
+    state.command;
+};
+export const numOfAttacks = (state: State): number => {
+  return state.type === 'Fortification'
+    ? 0
+    : ancestryStats[state.ancestry].numOfAttacks +
+    (state.type === 'Levies'
+      ? 0
+      : experienceStats[state.experience].numOfAttacks +
+      equipmentStats[state.equipment].numOfAttacks) +
+    typeStats[state.type].numOfAttacks +
+    state.numOfAttacks;
+};
+export const attackdamage = (state: State): number => {
+  return state.type === 'Fortification'
+    ? 0
+    : ancestryStats[state.ancestry].attackdamage +
+    (state.type === 'Levies'
+      ? 0
+      : experienceStats[state.experience].attackdamage +
+      equipmentStats[state.equipment].attackdamage) +
+    typeStats[state.type].attackdamage +
+    state.attackdamage;
 };
 
 export const cost = (state: State): number => {
@@ -80,6 +114,9 @@ export const cost = (state: State): number => {
     power(state) +
     defense(state, true) +
     toughness(state, true) +
+    command(state) +
+    numOfAttacks(state) +
+    attackdamage(state) +
     morale(state) * 2;
 
   cost = cost * typeStats[state.type].costMultiplier;

@@ -3,12 +3,14 @@ import { UnitStats } from '../../types/units';
 
 const positive = (num: number): string => (Math.sign(num) >= 0 ? '+' : '');
 export const CardTable = ({
-  size,
   attack,
   defense,
   power,
   toughness,
   morale,
+  numOfAttacks,
+  attackdamage,
+  command,
   type,
 }: UnitStats) => (
   <table className="card-table">
@@ -36,8 +38,16 @@ export const CardTable = ({
         <td className="text-right pad-right">
           {type === 'Fortification' ? '—' : `${positive(morale)}${morale}`}
         </td>
-        <td>Size:</td>
-        <td className="text-right text-transform-none">1{size}</td>
+        <td>Command:</td>
+        <td className="text-right text-transform-none">{command}</td>
+      </tr>
+      <tr>
+        <td># of Attack:</td>
+        <td className="text-right pad-right">
+          {numOfAttacks}
+        </td>
+        <td>Damage:</td>
+        <td className="text-right text-transform-none">{attackdamage}</td>
       </tr>
     </tbody>
   </table>

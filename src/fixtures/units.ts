@@ -1,5 +1,6 @@
 import {
   UnitSize,
+  UnitTier,
   UnitEquipment,
   UnitExperience,
   UnitType,
@@ -54,7 +55,8 @@ export const unitEquipments: UnitEquipment[] = [
   'Heavy',
   'Super-Heavy',
 ];
-export const unitSizes: UnitSize[] = ['d4', 'd6', 'd8', 'd10', 'd12'];
+export const unitSizes: UnitSize[] = ['4', '6', '8', '10', '12'];
+export const unitTiers: UnitTier[] = ['I', 'II', 'III', 'IV', 'V']
 export const fortLevels: FortLevel[] = ['1st', '2nd', '3rd', '4th', '5th'];
 export const fortTypes: FortType[] = ['None', 'Keep', 'Tower', 'Temple'];
 

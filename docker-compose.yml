@@ -1,0 +1,15 @@
+version: "3.8"
+
+services:
+  unit-cards:
+    build: .
+    container_name: unit-cards
+    restart: unless-stopped
+    networks:
+      - web
+    ports:
+       - "8083:80"
+
+networks:
+  web:
+    external: true

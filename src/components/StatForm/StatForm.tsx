@@ -8,6 +8,7 @@ import {
   UnitExperience,
   UnitEquipment,
   UnitSize,
+  UnitTier,
   FortLevel,
   FortType,
 } from '../../types/units';
@@ -17,6 +18,7 @@ import {
   unitExperiences,
   unitEquipments,
   unitSizes,
+  unitTiers,
   fortLevels,
   fortTypes,
 } from '../../fixtures/units';
@@ -172,6 +174,27 @@ export class StatForm extends Component<Props> {
                 }
               >
                 {unitTypes.map((value) => (
+                  <option value={value} key={value}>
+                    {value}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div className="form-group">
+              <label>Tier</label>
+              <select
+                className="form-control"
+                value={state.tier}
+                disabled={
+                  state.type === 'Fortification' && state.fortType !== 'None'
+                }
+                onChange={(e) =>
+                  update({
+                    tier: e.currentTarget.value as UnitTier,
+                  })
+                }
+              >
+                {unitTiers.map((value) => (
                   <option value={value} key={value}>
                     {value}
                   </option>
@@ -339,21 +362,30 @@ export class StatForm extends Component<Props> {
                 />
               </div>
               <div className="form-group">
-                <label>Defense adjustment</label>
-                <input
-                  type="number"
-                  className="form-control"
-                  value={state.defense}
-                  onChange={(e) => update({ defense: Number(e.target.value) })}
-                />
-              </div>
-              <div className="form-group">
                 <label>Power adjustment</label>
                 <input
                   type="number"
                   className="form-control"
                   value={state.power}
                   onChange={(e) => update({ power: Number(e.target.value) })}
+                />
+              </div>
+              <div className="form-group">
+                <label>Morale adjustment</label>
+                <input
+                  type="number"
+                  className="form-control"
+                  value={state.morale}
+                  onChange={(e) => update({ morale: Number(e.target.value) })}
+                />
+              </div>
+              <div className="form-group">
+                <label>Number of Attacks Adjustment</label>
+                <input
+                  type="number"
+                  className="form-control"
+                  value={state.numOfAttacks}
+                  onChange={(e) => update({ numOfAttacks: Number(e.target.value) })}
                 />
               </div>
               <div className="form-group">
@@ -368,6 +400,15 @@ export class StatForm extends Component<Props> {
             </div>
             <div className="col-md-6">
               <div className="form-group">
+                <label>Defense adjustment</label>
+                <input
+                  type="number"
+                  className="form-control"
+                  value={state.defense}
+                  onChange={(e) => update({ defense: Number(e.target.value) })}
+                />
+              </div>
+              <div className="form-group">
                 <label>Toughness adjustment</label>
                 <input
                   type="number"
@@ -379,12 +420,21 @@ export class StatForm extends Component<Props> {
                 />
               </div>
               <div className="form-group">
-                <label>Morale adjustment</label>
+                <label>Command Adjustment</label>
                 <input
                   type="number"
                   className="form-control"
-                  value={state.morale}
-                  onChange={(e) => update({ morale: Number(e.target.value) })}
+                  value={state.command}
+                  onChange={(e) => update({ command: Number(e.target.value) })}
+                />
+              </div>
+              <div className="form-group">
+                <label>Damage Adjustment</label>
+                <input
+                  type="number"
+                  className="form-control"
+                  value={state.attackdamage}
+                  onChange={(e) => update({ attackdamage: Number(e.target.value) })}
                 />
               </div>
               <div className="form-group">

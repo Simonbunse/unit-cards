@@ -60,11 +60,15 @@ export class Card extends Component<Props> {
       equipment,
       type,
       size,
+      tier,
       attack,
       defense,
       power,
       toughness,
       morale,
+      numOfAttacks,
+      attackdamage,
+      command,
       cost,
       fortType,
       fortLevel,
@@ -91,31 +95,29 @@ export class Card extends Component<Props> {
             />
           </div>
           <div
-            className={`card-top ${
-              type === 'Fortification' ? 'card-top-fort' : ''
-            }`}
+            className={`card-top ${type === 'Fortification' ? 'card-top-fort' : ''
+              }`}
           >
-            <div className="card-name">{name}</div>
+            <div className="card-name">{name} - Tier: {tier}</div>
             {type === 'Levies' ? (
               <div className="card-type">
                 {ancestryOverride
                   ? ancestryOverride
                   : ancestry === 'None'
-                  ? ''
-                  : ancestry}{' '}
+                    ? ''
+                    : ancestry}{' '}
                 {type}
               </div>
             ) : type === 'Fortification' ? (
-              <div className="card-type">{`${
-                fortType !== 'None' ? `${fortLevel} level ` : ''
-              }${type}${fortType !== 'None' ? ` (${fortType})` : ''}`}</div>
+              <div className="card-type">{`${fortType !== 'None' ? `${fortLevel} level ` : ''
+                }${type}${fortType !== 'None' ? ` (${fortType})` : ''}`}</div>
             ) : (
               <div className="card-type">
                 {ancestryOverride
                   ? ancestryOverride
                   : ancestry === 'None'
-                  ? ''
-                  : ancestry}{' '}
+                    ? ''
+                    : ancestry}{' '}
                 {experience}
                 <br />
                 {equipment} {type}
@@ -123,34 +125,41 @@ export class Card extends Component<Props> {
             )}
           </div>
           <div className="card-main">
-            <div className="card-cost">Cost: {cost ? cost : '-'}</div>
+            <div className="card-cost">
+              <div>Size: {size}</div>
+              <div>Cost: {cost ? cost : '-'}</div>
+            </div>
             <CardTable
               size={size}
+              tier={tier}
               attack={attack}
               defense={defense}
               power={power}
               toughness={toughness}
               morale={morale}
+              numOfAttacks={numOfAttacks}
+              attackdamage={attackdamage}
+              command={command}
               type={type}
             />
             {(ancestryStats[ancestry].traits.length &&
               type !== 'Fortification') ||
-            (type === 'Fortification' && fortType !== 'None') ||
-            selectedTraits.length ||
-            type === 'Cavalry' ||
-            type === 'Siege Engine' ||
-            type === 'Levies' ? (
+              (type === 'Fortification' && fortType !== 'None') ||
+              selectedTraits.length ||
+              type === 'Cavalry' ||
+              type === 'Siege Engine' ||
+              type === 'Levies' ? (
               <>
                 <div className="card-traits">Traits</div>
 
                 {type === 'Fortification'
                   ? null
                   : ancestryStats[ancestry].traits.map((trait) => (
-                      <Trait
-                        trait={traitData.find((t) => t.name === trait)}
-                        key={`ancestry-${trait}`}
-                      />
-                    ))}
+                    <Trait
+                      trait={traitData.find((t) => t.name === trait)}
+                      key={`ancestry-${trait}`}
+                    />
+                  ))}
                 {selectedTraits.map((trait) => (
                   <div key={`parent-${trait}`}>
                     {traitData.find((t) => t.name === trait.value) ? (

@@ -39,7 +39,8 @@ export type UnitExperience =
   | 'Elite'
   | 'Super-Elite';
 export type UnitEquipment = 'Light' | 'Medium' | 'Heavy' | 'Super-Heavy';
-export type UnitSize = 'd4' | 'd6' | 'd8' | 'd10' | 'd12' | 'd20';
+export type UnitSize = '4' | '6' | '8' | '10' | '12' | '20';
+export type UnitTier = 'I' | 'II' | 'III' | 'IV' | 'V';
 export type FortLevel = '1st' | '2nd' | '3rd' | '4th' | '5th';
 export type FortType = 'Keep' | 'Tower' | 'Temple' | 'None';
 
@@ -59,7 +60,11 @@ export interface UnitStats {
   power: number;
   toughness: number;
   morale: number;
+  command: number;
+  numOfAttacks: number;
+  attackdamage: number;
   size: UnitSize;
+  tier: UnitTier;
   type: UnitType;
 }
 export interface UnitData extends UnitStats {

@@ -6,24 +6,28 @@
   text-align: left;
   position: relative;
 }
+
 .card-corner-ne {
   position: absolute;
   top: 5px;
   right: 5px;
   width: 40px;
 }
+
 .card-corner-se {
   position: absolute;
   bottom: 5px;
   right: 5px;
   width: 40px;
 }
+
 .card-corner-sw {
   position: absolute;
   bottom: 5px;
   left: 5px;
   width: 40px;
 }
+
 .card-inner {
   border: 2px solid black;
   width: 100%;
@@ -33,32 +37,38 @@
   color: #b33320;
   font-size: 13px;
 }
+
 .card-top {
   padding-left: 70px;
   padding-top: 10px;
   min-height: 90px;
 }
+
 .card-top-fort {
   min-height: 75px;
 }
+
 .card-main {
   padding-bottom: 15px;
 }
+
 .card-name {
   font-family: 'Domine', serif;
   text-transform: uppercase;
   font-weight: 700;
   color: #df1314;
-  font-size: 16px;
+  font-size: 14px;
   border-bottom: 2px solid black;
   margin-bottom: 5px;
 }
+
 .card-type {
   font-family: 'Domine', serif;
   text-transform: uppercase;
   font-weight: 700;
   font-size: 12px;
 }
+
 .card-traits {
   font-family: 'Domine', serif;
   text-transform: uppercase;
@@ -66,12 +76,14 @@
   color: #df1314;
   margin-top: 7px;
 }
+
 .card-table {
   width: 100%;
   border-spacing: 0;
   border-collapse: collapse;
   border-top: 2px solid black;
 }
+
 .card-table td {
   border-bottom: 2px solid black;
   color: #df1314;
@@ -79,10 +91,14 @@
   font-weight: 700;
   font-family: 'Cabin', sans-serif;
 }
+
 .card-cost {
-  text-align: right;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
   text-transform: uppercase;
 }
+
 .commander {
   margin-top: 10px;
   text-align: center;

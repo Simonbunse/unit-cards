@@ -9,6 +9,7 @@ import {
   UnitExperience,
   UnitEquipment,
   UnitSize,
+  UnitTier,
   UnitData,
   FortLevel,
   FortType,
@@ -20,6 +21,9 @@ import {
   power,
   toughness,
   morale,
+  command,
+  numOfAttacks,
+  attackdamage,
   cost,
 } from './utils/statCalculator';
 import { CustomTrait, traitData, TraitData } from './fixtures/traits';
@@ -30,6 +34,7 @@ import {
   unitExperiences,
   unitEquipments,
   unitSizes,
+  unitTiers,
 } from './fixtures/units';
 import { fortSize } from './fixtures/unitStats';
 import ReactDOM from 'react-dom';
@@ -44,11 +49,15 @@ export interface State {
   equipment: UnitEquipment;
   selectedTraits: { value: string }[];
   size: UnitSize;
+  tier: UnitTier;
   attack: number;
   defense: number;
   power: number;
   toughness: number;
   morale: number;
+  command: number;
+  numOfAttacks: number,
+  attackdamage: number,
   fortLevel: FortLevel;
   fortType: FortType;
   cost: number;
@@ -71,12 +80,16 @@ class App extends Component<{}, State> {
     experience: 'Regular' as UnitExperience,
     equipment: 'Medium' as UnitEquipment,
     selectedTraits: [] as { value: string }[],
-    size: 'd6' as UnitSize,
+    size: '6' as UnitSize,
+    tier: 'I' as UnitTier,
     attack: 0,
     defense: 0,
     power: 0,
     toughness: 0,
     morale: 0,
+    command: 0,
+    numOfAttacks: 0,
+    attackdamage: 0,
     fortLevel: '1st' as FortLevel,
     fortType: 'None' as FortType,
     cost: 0,
@@ -109,6 +122,7 @@ class App extends Component<{}, State> {
       equipment:
         unitEquipments[Math.floor(Math.random() * unitEquipments.length)],
       size: unitSizes[Math.floor(Math.random() * unitSizes.length)],
+      tier: unitTiers[Math.floor(Math.random() * unitTiers.length)]
     });
   };
 
@@ -120,11 +134,15 @@ class App extends Component<{}, State> {
       power: power(this.state),
       toughness: toughness(this.state),
       morale: morale(this.state),
+      command: command(this.state),
+      numOfAttacks: numOfAttacks(this.state),
+      attackdamage: attackdamage(this.state),
       cost: cost(this.state),
       size:
         this.state.type === 'Fortification' && this.state.fortType !== 'None'
           ? (fortSize[this.state.fortType][this.state.fortLevel] as UnitSize)
           : this.state.size,
+
     };
   };
 
@@ -199,11 +217,15 @@ class App extends Component<{}, State> {
       equipment,
       selectedTraits,
       size,
+      tier,
       attack,
       defense,
       power,
       toughness,
       morale,
+      command,
+      numOfAttacks,
+      attackdamage,
       fortLevel,
       fortType,
       cost,
@@ -225,11 +247,15 @@ class App extends Component<{}, State> {
             equipment,
             selectedTraits,
             size,
+            tier,
             attack,
             defense,
             power,
             toughness,
             morale,
+            numOfAttacks,
+            attackdamage,
+            command,
             fortLevel,
             fortType,
             cost,
@@ -411,12 +437,14 @@ class App extends Component<{}, State> {
           <small>
             Iconography by Dan Connolly.
             <br />
-            An{' '}
+            A project by Simon Hastrup as a fork with 99.9% of the original code from the {' '}
             <a href="https://github.com/freddybushboy/unit-cards">
               open-source
             </a>{' '}
             project built by{' '}
             <a href="https://twitter.com/FreddyBushBoy">freddybushboy</a>.
+            <br />
+            big thanks to him.
           </small>
         </p>
       </div>
